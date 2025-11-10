@@ -1,4 +1,4 @@
-# 🚀 Alien Dash – AWS-Powered Unity Game
+# 🚀 Alien Spy – AWS-Powered Unity Game
 
 [![Unity](https://img.shields.io/badge/Engine-Unity-000000?logo=unity)]()
 [![AWS](https://img.shields.io/badge/Cloud-AWS-232F3E?logo=amazonaws)]()
@@ -6,13 +6,13 @@
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)]()
 [![Status](https://img.shields.io/badge/Status-In%20Development-yellow)]()
 
-> **Alien Dash** is a serverless, multiplayer Unity WebGL game integrating AWS Lambda, DynamoDB, and Cognito.  
+> **Alien Spy** is a serverless, multiplayer Unity WebGL game integrating AWS Lambda, DynamoDB, and Cognito.  
 > Designed to bridge **cloud learning** and **game development**, it enables students to gain *hands-on AWS experience* through a fun, interactive environment.
 
 ---
 
 ## 🎯 Executive Summary
-**Alien Dash** transforms traditional cloud computing education into an interactive experience.  
+**Alien Spy** transforms traditional cloud computing education into an interactive experience.  
 Built as a **1v1 endless runner**, it leverages **AWS serverless architecture** to deliver scalable multiplayer gameplay, AI-powered avatar personalization, and real-time leaderboard updates.
 
 **Key Features**
@@ -118,7 +118,7 @@ DynamoDB Streams → SNS → Lambda (Real-time Updates)
 ---
 
 ## 📚 Learning Objectives
-Alien Dash is more than a game — it’s a **learning framework** for students to:
+Alien Spy is more than a game — it’s a **learning framework** for students to:
 - Understand AWS serverless architecture (Lambda, DynamoDB, API Gateway)
 - Integrate Unity WebGL with real-world cloud infrastructure
 - Design scalable multiplayer logic using event-driven systems
