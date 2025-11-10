@@ -6,11 +6,11 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Alien Dash: AWS-Powered Gaming Infrastructure
+# Alien Spy: AWS-Powered Gaming Infrastructure
 ## A Serverless Unity Game for Cloud Skills Development
 
 ### 1. Executive Summary
-**Alien Dash** is a serverless, endless runner game developed with Unity and AWS to serve as a hands-on learning framework for cloud integration. The platform addresses the critical skills gap in Vietnamese universities: while students learn AWS services like Lambda, DynamoDB, and API Gateway, they rarely experience realistic multi-service integration.  
+**Alien Spy** is a serverless, endless runner game developed with Unity and AWS to serve as a hands-on learning framework for cloud integration. The platform addresses the critical skills gap in Vietnamese universities: while students learn AWS services like Lambda, DynamoDB, and API Gateway, they rarely experience realistic multi-service integration.  
 
 Key features include:  
 - **1v1 Real-time Race Mode**  
@@ -157,12 +157,12 @@ Key features include:
 
 ---
 
-### 9. Game Design Overview – Alien Dash
+### 9. Game Design Overview – Alien Spy
 - **Theme**: Sci-fi Vietnam  
 - **Character**: Alien UFO, AI personalized avatar  
 - **Obstacles**: Dashable & non-dashable  
 - **Items**: Buffs/Debuffs  
-- **Currency & Shop**: ₫10,000 coins  
+- **Currency & Shop**: Laos Tobacco  
 - **Maps & Levels**: 3 regions, 5 levels each, boss at milestone levels  
 - **Leaderboard**: Real-time, local & global  
 - **Real-Time Events**: Live challenges via SNS/DynamoDB Streams  

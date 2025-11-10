@@ -6,12 +6,12 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Alien Dash: Hạ Tầng Game Dựa Trên AWS
+# Alien Spy: Hạ Tầng Game Dựa Trên AWS
 ## Game Unity Serverless cho Phát Triển Kỹ Năng Cloud
 
 
 ### 1. Tóm tắt điều hành
-**Alien Dash** là một trò chơi endless runner serverless phát triển bằng Unity và AWS, nhằm làm nền tảng học tập thực hành tích hợp cloud. Nền tảng này giải quyết khoảng trống kỹ năng cloud ở các trường đại học Việt Nam: sinh viên học các dịch vụ AWS như Lambda, DynamoDB, API Gateway nhưng hiếm khi trải nghiệm tích hợp nhiều dịch vụ thực tế.  
+**Alien Spy** là một trò chơi endless runner serverless phát triển bằng Unity và AWS, nhằm làm nền tảng học tập thực hành tích hợp cloud. Nền tảng này giải quyết khoảng trống kỹ năng cloud ở các trường đại học Việt Nam: sinh viên học các dịch vụ AWS như Lambda, DynamoDB, API Gateway nhưng hiếm khi trải nghiệm tích hợp nhiều dịch vụ thực tế.  
 
 
 **Các tính năng chính**:  
@@ -60,7 +60,7 @@ pre: " <b> 2. </b> "
 **Kiến trúc tổng thể**  
 
 
-![Alien Dash Architecture Placeholder](/images/2-Proposal/platform_architecture.jpeg)
+![Alien Spy Architecture Placeholder](/images/2-Proposal/platform_architecture.jpeg)
 
 
 **Dịch vụ AWS sử dụng**  
@@ -184,12 +184,12 @@ pre: " <b> 2. </b> "
 ---
 
 
-### 9. Tổng quan Game Design – Alien Dash
+### 9. Tổng quan Game Design – Alien Spy
 - **Chủ đề**: Sci-fi Việt Nam  
 - **Nhân vật**: Alien trên UFO, avatar cá nhân hóa AI  
 - **Chướng ngại**: Dashable & non-dashable  
 - **Vật phẩm**: Buffs/Debuffs  
-- **Tiền & Shop**: Đồng ₫10,000  
+- **Tiền & Shop**: Thuốc lào  
 - **Bản đồ & Level**: 3 vùng, 5 level mỗi vùng, boss tại các level mốc  
 - **Leaderboard**: Real-time, local & global  
 - **Sự kiện thời gian thực**: Thử thách trực tiếp qua SNS/DynamoDB Streams
