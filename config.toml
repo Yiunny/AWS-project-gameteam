@@ -1,4 +1,5 @@
-baseURL = "https://thienluhoan.github.io/workshop-template/"
+baseURL = "https://yiunny.github.io/AWS-project-gameteam/"
+uglyURLs = false
 relativeURLs = true
 canonifyURLs = true
 
@@ -15,11 +16,14 @@ home = [ "HTML", "RSS", "JSON"]
   # Git hub repo link
   editURL = ""  
   description = ""
-  author = "thienlh@thienlu.com"
+  author = "legendtv.animation.smart@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
+  disableLanguageSwitchingButton = false
   
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
 [Languages]
 [Languages.en]
 title = "Internship Report"
