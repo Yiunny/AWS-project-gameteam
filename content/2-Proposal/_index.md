@@ -48,6 +48,8 @@ Key features include:
 ---
 
 ### 3. Solution Architecture
+**Overall Structure**
+![Alien Spy Architecture Placeholder](/images/2-Proposal/aws.png)
 #### High-Level Architecture
 - **Frontend:** Route 53, WAF, CloudFront, S3 hosting WebGL
 - **Backend:** API Gateway (REST/WebSocket), Lambda, DynamoDB
@@ -162,7 +164,7 @@ Key features include:
 - **Character**: Alien UFO, AI personalized avatar  
 - **Obstacles**: Dashable & non-dashable  
 - **Items**: Buffs/Debuffs  
-- **Currency & Shop**: Laos Tobacco  
+- **Currency & Shop**: Bamboo pipe Tobacco  
 - **Maps & Levels**: 3 regions, 5 levels each, boss at milestone levels  
 - **Leaderboard**: Real-time, local & global  
 - **Real-Time Events**: Live challenges via SNS/DynamoDB Streams  

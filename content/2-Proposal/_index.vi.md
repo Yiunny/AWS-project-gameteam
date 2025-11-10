@@ -60,7 +60,7 @@ pre: " <b> 2. </b> "
 **Kiến trúc tổng thể**  
 
 
-![Alien Spy Architecture Placeholder](/images/2-Proposal/platform_architecture.jpeg)
+![Alien Spy Architecture Placeholder](/images/2-Proposal/aws.png)
 
 
 **Dịch vụ AWS sử dụng**  
@@ -189,7 +189,7 @@ pre: " <b> 2. </b> "
 - **Nhân vật**: Alien trên UFO, avatar cá nhân hóa AI  
 - **Chướng ngại**: Dashable & non-dashable  
 - **Vật phẩm**: Buffs/Debuffs  
-- **Tiền & Shop**: Thuốc lào  
+- **Tiền & Shop**: Thuốc lào   
 - **Bản đồ & Level**: 3 vùng, 5 level mỗi vùng, boss tại các level mốc  
 - **Leaderboard**: Real-time, local & global  
 - **Sự kiện thời gian thực**: Thử thách trực tiếp qua SNS/DynamoDB Streams
