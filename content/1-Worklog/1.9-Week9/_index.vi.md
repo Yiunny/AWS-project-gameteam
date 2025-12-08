@@ -5,55 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 9:
+* Tìm hiểu các dịch vụ Monitoring của AWS (CloudWatch, CloudTrail, X-Ray).  
+* Hiểu cách theo dõi hành vi ứng dụng và hạ tầng.  
+* Thực hành tạo alarm, log, tracing và giám sát EC2/RDS.
 
-### Mục tiêu tuần 9:
+### Nhiệm vụ trong tuần:
+| Ngày | Nhiệm vụ                                                             | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                         |
+| ---- | --------------------------------------------------------------------- | ------------ | ---------------- | ------------------------------------------ |
+| 57   | Giới thiệu CloudWatch Metrics                                        | 03/11/2025   | 03/11/2025       | <https://docs.aws.amazon.com/cloudwatch/>  |
+| 58   | CloudWatch Logs: log group, stream, filter                           | 04/11/2025   | 04/11/2025       | <https://docs.aws.amazon.com/cloudwatch/>  |
+| 59   | Tạo CloudWatch Alarms                                                | 05/11/2025   | 05/11/2025       | <https://docs.aws.amazon.com/cloudwatch/>  |
+| 60   | X-Ray tracing cho ứng dụng Spring Boot                               | 06/11/2025   | 06/11/2025       | <https://docs.aws.amazon.com/xray/>        |
+| 61   | Giới thiệu CloudTrail & theo dõi hoạt động tài khoản                 | 07/11/2025   | 07/11/2025       | <https://docs.aws.amazon.com/cloudtrail/>  |
+| 62   | Thực hành giám sát EC2 & RDS bằng CloudWatch                         | 08/11/2025   | 08/11/2025       | <https://cloudjourney.awsstudygroup.com/>  |
+| 63   | Tổng kết & ôn tập Monitoring                                         | 09/11/2025   | 09/11/2025       | <https://aws.amazon.com/>                  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 9:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Thành tựu Tuần 9:
+* Hiểu rõ CloudWatch Metrics, Logs và Alarms.  
+* Thiết lập CloudTrail để theo dõi mọi hoạt động tài khoản.  
+* Tích hợp AWS X-Ray để trace request trong Spring Boot.  
+* Giám sát hiệu năng EC2 & RDS.  
+* Nâng cao kỹ năng quản lý vận hành & giám sát hệ thống.

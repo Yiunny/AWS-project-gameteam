@@ -5,55 +5,26 @@ weight: 2
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 11:
+* Tìm hiểu các chủ đề nâng cao về kiến trúc AWS.  
+* Hiểu AutoScaling, Load Balancer và Route53.  
+* Thực hành xây dựng hệ thống mở rộng & sẵn sàng cao.
 
-### Mục tiêu tuần 11:
+### Nhiệm vụ trong tuần:
+| Ngày | Nhiệm vụ                               | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                          |
+| ---- | ---------------------------------------- | ------------ | ---------------- | ------------------------------------------- |
+| 71   | Tìm hiểu AutoScaling EC2                | 17/11/2025   | 17/11/2025       | <https://docs.aws.amazon.com/autoscaling/>  |
+| 72   | Load Balancer (ALB, NLB)                | 18/11/2025   | 18/11/2025       | <https://docs.aws.amazon.com/elasticloadbalancing/> |
+| 73   | Kiến thức DNS qua Route53               | 19/11/2025   | 19/11/2025       | <https://docs.aws.amazon.com/route53/>      |
+| 74   | Thực hành AutoScaling + ALB             | 20/11/2025   | 20/11/2025       | <https://cloudjourney.awsstudygroup.com/>   |
+| 75   | S3 cross-region replication              | 21/11/2025   | 21/11/2025       | <https://docs.aws.amazon.com/s3/>           |
+| 76   | VPC Peering & Transit Gateway           | 22/11/2025   | 22/11/2025       | <https://docs.aws.amazon.com/vpc/>          |
+| 77   | Tổng kết các chủ đề nâng cao            | 23/11/2025   | 23/11/2025       | <https://aws.amazon.com/>                   |
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 11:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Thành tựu Tuần 11:
+* Hiểu rõ các thành phần kiến trúc mở rộng.  
+* Triển khai AutoScaling kết hợp ALB.  
+* Cấu hình DNS Routing qua Route53.  
+* Thiết lập replication nhiều region cho S3.  
+* Nắm vững các kiến thức networking nâng cao.
