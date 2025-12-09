@@ -5,122 +5,114 @@ weight: 1
 chapter: false
 pre: " <b> 3.4. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
-
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
-
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+# Pearson at AWS DC Summit 2025: Transforming Education Through AI-Powered Learning Solutions
+![Pearson AWS Picture](/images/Pearson.png)
+Artificial intelligence (AI) is transforming not only how we work, but also how we learn and build the skills needed to succeed in a rapidly changing economy.  
+When designed and applied correctly, AI can unlock personalized learning experiences, helping individuals access essential knowledge and skills to adapt in a world where technology evolves faster than ever.  
+**In the keynote address at AWS Summit 2025 in Washington, DC**, Amazon Web Services (AWS) and Pearson showcased the power of their expanding partnership to advance personalized, AI-powered learning solutions.  
+Omar Abbosh, CEO of Pearson, together with Dave Levy, Vice President of Worldwide Public Sector, Healthcare, and Life Sciences at AWS, demonstrated how generative AI is revolutionizing learning pathways—from K–12 to professional development.
 
 ---
 
-## Architecture Guidance
+## Closing the Growing Skills Gap
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+In his presentation, Omar emphasized that **by 2030, around 65% of workforce skills will be reshaped** by the rapid development of AI and technology.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+This represents a significant shift, especially when nearly **30 million Americans still lack a high school diploma**, and many others continue to struggle with **basic reading, writing, and math skills**.
 
-**The solution architecture is now as follows:**
+Many individuals are being left behind—between school and work, or between their current jobs and new opportunities—because they lack the skills needed to advance in their careers.
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+As AI continues driving change across industries, Omar warned that the current skills gap “could quickly become a chasm without bold action now.”
 
----
+Beyond the individual impact, the skills gap also leads to major economic losses.  
+According to **Pearson research**, inefficient transitions between learning and employment cost the U.S. economy **about $1.1 trillion annually**—roughly **5% of national GDP**.
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
-
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+Even small improvements—such as shortening career transitions by a few weeks—could generate more than **$40 billion in additional annual economic value**.
 
 ---
 
-## Technology Choices and Communication Scope
+## AI-Enhanced Learning Tools for Students and Educators
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+To help close the skills gap, Pearson is expanding its generative AI capabilities through **Amazon Bedrock**.
 
----
+With AWS AI technologies, Pearson can deliver more personalized, accessible, and flexible learning experiences to millions of learners worldwide.
 
-## The Pub/Sub Hub
+Omar introduced **Pearson Revise**—an intelligent exam-preparation tool for high school students that provides study guidance, instant feedback, and personalized flashcards.
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+The tool also helps teachers and parents detect early knowledge gaps so they can offer timely support.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+These AI-powered tools have already shown meaningful impact:
 
----
+Over the past year, more than 2 million students used Pearson’s integrated AI learning features.
 
-## Core Microservice
+Those who used the tools were **four times more likely** to become active, self-directed learners compared to those who did not.
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+However, Omar emphasized that “technology alone is not enough.”
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+He shared:
 
----
+   “When you put humans in the learning loop alongside great technology, you can achieve truly remarkable outcomes.”
 
-## Front Door Microservice
+This is why supporting millions of teachers worldwide—those who teach tens of millions of students and prepare them for the future of work—has never been more important.
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+According to Pearson research, 43% of teachers spend at least 3 hours per week creating lesson plans, time that could instead be used for coaching, mentoring, and direct student support.
+
+To assist educators, Pearson developed the **Smart Lesson Generator**, a generative AI tool that automates lesson planning.
+
+The tool can generate quizzes, reading passages, and practice activities in just seconds.
+
+By combining Pearson’s trusted academic content with flexible customization, the Smart Lesson Generator helps teachers save hours of work each week.
 
 ---
 
-## Staging ER7 Microservice
+## Improving Assessment Efficiency and Teacher Development
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+Pearson is also leveraging AI to optimize test creation and support teacher professional development.
+
+Omar introduced the **Connections Academy** platform—a digital learning environment where teachers can generate assessments aligned to curriculum standards within minutes, from multiple-choice questions to short essays.
+
+These tools help educators save nearly 50% of the time typically used for creating assessments.
+
+Pearson’s commitment to innovation extends beyond K–12 education.  
+The company is developing lifelong learning tools, including digital wallets and credential management systems, enabling learners to build, validate, and showcase their skills to employers.
 
 ---
 
-## New Features in the Solution
+## Looking Ahead: AI as the Foundation of Lifelong Learning
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Omar concluded his keynote with optimism about AI’s role in expanding educational opportunities and driving shared prosperity.
+
+He called for responsible adoption of AI, viewing it as a tool for closing skills gaps and preparing learners for the future of work.
+
+“AI is not just a disruptive force—it’s a solution,”
+
+ Omar shared.
+
+ “AI helps us think smarter, close the skills gap, and open doors to greater prosperity.”
+
+Pearson’s AI-powered learning tools and platforms—built on AWS—are helping millions of students, educators, and organizations achieve better outcomes at every stage of learning.
+
+To explore your own AI learning journey, visit <a href="https://genAItestdrive.com/?utm_source=Partner-Website&utm_medium=Blog&utm_campaign=ELS-AWS-DC-Summit&utm_content=Recap-2025&utm_date=07-01-25" target="_blank" rel="noopener">genAItestdrive.com</a>, where you can take Pearson’s free generative AI skills assessment and discover the right development pathway.
+
+The conversation about the future of technology and education will continue at the AWS Imagine Education, State, and Local Government conference, taking place July 29–30, 2025, in Chicago, Illinois.
+
+This free event will bring together nearly 1,000 education leaders to discuss how AI and cloud technologies are advancing lifelong learning and educational innovation.  
+<a href="https://aws.amazon.com/government-education/imagine/?trk=2e168234-efaf-4e39-9ad6-cfba8df219d4&sc_channel=sm" target="_blank" rel="noopener">Register now to attend</a>
+
+---
+
+## Read more related stories:
+
+- <a href="https://plc.pearson.com/en-GB/news-and-insights/news/study-smarter-new-ai-powered-gcse-exam-practice-assistant-delivers?utm_source=Partner-Website&utm_medium=Blog&utm_campaign=ELS-AWS-DC-Summit&utm_content=Recap-2025&utm_date=07-01-25" target="_blank" rel="noopener">Study smarter: New AI-Powered GCSE Exam Practice Assistant delivers a personalized revision experience</a>
+
+- <a href="https://aws.amazon.com/blogs/publicsector/highlights-from-the-2025-aws-summit-washington-dc-keynote/" target="_blank" rel="noopener">Highlights from the 2025 AWS Summit Washington, DC keynote</a>
+
+- <a href="https://aws.amazon.com/blogs/publicsector/a-year-of-progress-aws-update-on-the-50-Million-generative-ai-impact-initiative-for-public-sector/" target="_blank" rel="noopener">A year of progress: AWS update on the $50 Million Generative AI Impact Initiative for public sector</a>
+
+- <a href="https://aws.amazon.com/blogs/publicsector/university-of-british-columbia-cloud-innovation-centre-prototyping-generative-ai-solutions-using-aws/" target="_blank" rel="noopener">University of British Columbia Cloud Innovation Centre: Prototyping generative AI solutions using AWS</a>
+
+- <a href="https://aws.amazon.com/blogs/publicsector/doing-more-with-less-in-higher-education-how-institutions-drive-efficiency-with-ai-and-automation-on-aws/" target="_blank" rel="noopener">Doing more with less in higher education: How institutions drive efficiency with AI and automation on AWS</a>
+
+- <a href="https://aws.amazon.com/blogs/publicsector/transforming-student-wellbeing-support-with-amazon-bedrock-and-sxp-ai/" target="_blank" rel="noopener">Transforming student wellbeing support with Amazon Bedrock and SXP.ai</a>
+

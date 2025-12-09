@@ -5,122 +5,342 @@ weight: 1
 chapter: false
 pre: " <b> 3.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# How to Connect Your Robot to AWS Cloud and Drive Data-Driven Innovation
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+When you think about robots, do you only think about the hardware? Or do you think about creating robotics solutions that can achieve higher levels of automation and optimize complex workflows?
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+In reality, robotics technology is not just hardware – these physical devices rely on training systems and artificial intelligence to operate effectively. Today, robots can perform automation far beyond rigid hard-coded models, learning from their own experiences and making decisions based on the data they collect from their surroundings.
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+Ultimately, a robot is only as good as its ability to collect, store, and process data.
 
----
+Data is the driving force behind innovation in robotics – helping improve both hardware and control software.
 
-## Architecture Guidance
+Without data, you cannot:
+- Build a robot fleet monitoring dashboard for troubleshooting.
+- Train reusable Machine Learning (ML) models.
+- Run simulations to test and validate new features at lower cost.
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Your data strategy will determine whether you can build a sustainable solution from the start, continuously innovate for customers, and achieve optimal operational efficiency.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+In this article, we’ll share what we’ve learned from working with hundreds of robot developers to help them build a strong connectivity foundation that enables optimization and data-driven innovation – even when robots operate in remote, harsh environments where network connectivity may be unstable or interrupted.
 
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
-
----
-
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
-
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+You will also learn how to connect your ROS2 robot to AWS IoT Core, along with the new opportunities and use cases that become possible when your robot’s data is brought into the AWS Cloud.
 
 ---
 
-## Technology Choices and Communication Scope
+## Why Cloud-to-Edge Connectivity Matters in Robotics
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Deploying robots in production environments is highly complex, requiring multiple layers of intelligence such as navigation, behavior, AI, and ML.
 
----
+Many use cases require robots to communicate and collaborate with other robots, IoT devices, humans, and various control systems.
 
-## The Pub/Sub Hub
+For example, in a material-handling use case inside a factory, an industrial robot fleet must work seamlessly with the **work management system** and multiple **Programmable Logic Controllers (PLCs)** to ensure smooth movement of goods and optimal throughput.
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+The concepts of the **Internet of Robotic Things (IoRT)** and **Industrial IoT (IIoT)** have evolved rapidly, leveraging data from sensors, actuators, and autonomous things in consumer, business, and industrial environments.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+IoRT combines autonomous robotic systems with **IoT/IIoT**, **cloud computing**, and **AI/ML**, accelerating the development of intelligent, data-driven solutions.
 
----
+AWS believes that the data generated by robots is the key to improving the reliability and capabilities of robotic systems.
 
-## Core Microservice
+Connecting robots forms the foundational layer that enables you to collect and process data, enhance functionality, and improve visibility into performance and operations.  
+However, not all environments have stable, high-bandwidth cloud connectivity.
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+Therefore, the services within the **AWS IoT** and **Hybrid Cloud with AWS portfolio** are designed to support customers in every scenario – from robots that are fully cloud-connected to **robots operating independently (disconnected)**.
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+Now, let’s explore how to securely connect a **ROS2 robot** to **AWS IoT Core** and begin collecting telemetry data to enhance your robotics applications.
 
 ---
 
-## Front Door Microservice
+## Connecting Your ROS2 Robot to AWS Cloud and Starting Telemetry Data Collection
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+In this section, you will learn how to send telemetry data from a robot using **ROS2** to **AWS IoT Core** through the **MQTT protocol**.
 
----
+The example code has been tested on **Ubuntu 22.04** with **ROS2 Humble**.  
+You will need to configure certificates to connect your device to **AWS IoT Core**, using the **AWS CLI** along with appropriate **AWS Console** access permissions.
 
-## Staging ER7 Microservice
+#### 1. Install AWS CLI
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
 ```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+```
+
+#### 2. Configure Credentials
+This guide assumes you are using an **admin user**, but AWS recommends restricting permissions only to the operations required for AWS IoT.
+```yaml
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+export AWS_DEFAULT_REGION=us-west-2
+```
+#### 3. Install AWS IoT Device SDK for Python
+```yaml
+python3 -m pip install awsiotsdk
+```
+#### 4. Clone example source
+```yaml
+cd ~
+
+git clone https://github.com/aws-samples/aws-iot-robot-connectivity-samples-ros2.git
+```
+#### 5. Build the source
+```yaml
+cd ~/aws-iot-robot-connectivity-samples-ros2/workspace
+
+colcon build
+
+source ~/aws-iot-robot-connectivity-samples-ros2/workspace/install/setup.bash
+```
+Before running, you need to create certificates to communicate with **AWS IoT Core**.  
+Certificates enable authentication, authorization, and encryption in transit.
+
+Each robot must have its own credential to interact with AWS IoT.  
+All data sent and received is protected by **TLS (Transport Layer Security)**.
+
+![Send and receive in TLS](/images/CertificateAuth.png)
+
+You are responsible for managing **device credentials, X.509 certificates**, along with policies and permissions in AWS IoT.
+
+X.509 certificates authenticate the device with AWS IoT while providing stronger security than username/password or bearer tokens, because the **private key never leaves the device**.
+
+In large-scale production environments, you can use **AWS IoT Device Defender** to **audit, detect security posture issues**, and automatically apply remediation measures such as certificate rotation or isolating compromised devices.
+
+---
+## Setting Up Certificates and Configuring the Robot
+
+You will need to configure several **environment variables** to run AWS IoT API commands.
+
+These variables define where certificates are stored, the robot’s name, and the location of the sample configuration files.
+
+```yaml
+export CERT_FOLDER_LOCATION=~/aws-iot-robot-connectivity-samples-ros2/iot_certs_and_config/
+
+export THING_NAME=my_ros2_robot_thing
+
+export IOT_CONFIG_TEMPLATE=~/aws-iot-robot-connectivity-samples-ros2/templates/iot_config_template.json
+
+export IOT_POLICY_TEMPLATE=~/aws-iot-robot-connectivity-samples-ros2/templates/iot_policy_template.json
+
+export IOT_POLICY_NAME=ros2_robot_iot_policy
+```
+The command above will download the certificates into the ```$CERT_FOLDER_LOCATION``` directory on the robot.
+
+Next, download the root certificate to connect your AWS IoT Thing to AWS IoT Core, and attach the generated certificate to the Thing.
+
+AWS IoT provides client certificates signed by the **Amazon Root CA (Certificate Authority)**, which verifies the authenticity of the connection.
+
+```yaml
+ROOT_CERT_FILE=$CERT_FOLDER_LOCATION"rootCA".crt
+
+curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > $ROOT_CERT_FILE
+
+export CERT_ID=${CERT_ARN#*cert/}
+
+aws iot attach-thing-principal --principal $CERT_ARN --thing-name $THING_NAME
+```
+Now that you have **authentication** set up to connect to **AWS IoT Core**, you still need a policy to define permissions and access limitations for this device (AWS IoT Thing).
+
+The sample repository already includes a sample policy for testing — you can modify it based on your actual requirements.
+
+---
+
+## Configuring the ```iot_config.json``` File
+
+Create a copy of the sample file ```iot_config_template.json```, then fill in the endpoint and the corresponding certificate paths for your robot:
+```yaml
+export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+export ENDPOINT_ADDRESS=$(aws iot describe-endpoint --endpoint-type iot:Data-ATS --query endpointAddress --output text)
+
+export PORT=8883
+
+export IOT_CONFIG_FILE=~/aws-iot-robot-connectivity-samples-ros2/iot_certs_and_config/iot_config.json
+
+cat $IOT_CONFIG_TEMPLATE >> $IOT_CONFIG_FILE
+
+export PRIV_KEY_LOCATION=$CERT_FOLDER_LOCATION$THING_NAME.private.key
+
+export CERT_FILE=$CERT_FOLDER_LOCATION$THING_NAME.cert.pem
+
+sed -i -e "s/ENDPOINT/$ENDPOINT_ADDRESS/g" $IOT_CONFIG_FILE
+
+sed -i -e "s/ROOTCA/$(echo $ROOT_CERT_FILE | sed 's_/_\\/_g')/g" $IOT_CONFIG_FILE
+
+sed -i -e "s/PRIVATEKEY/$(echo $PRIV_KEY_LOCATION | sed 's_/_\\/_g')/g" $IOT_CONFIG_FILE
+
+sed -i -e "s/CERTPATH/$(echo $CERT_FILE | sed 's_/_\\/_g')/g" $IOT_CONFIG_FILE
+
+sed -i -e "s/CLIENT/$THING_NAME/g" $IOT_CONFIG_FILE
+
+sed -i -e "s/PORT/$PORT/g" $IOT_CONFIG_FILE
+
+cat $IOT_CONFIG_FILE
+
+```
+---
+
+## Creating an IoT Policy
+
+The sample policy file defines the permissions for the AWS IoT Thing.
+
+By default, this policy only allows publishing and receiving data from the ```ros2_mock_telemetry_topic``` topic.  
+You can extend the permissions when new use cases arise.
+
+```yaml
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Publish",
+        "iot:Receive",
+        "iot:RetainPublish"
+      ],
+      "Resource": [
+        "arn:aws:iot:us-west-2:ACCOUNT_ID:topic/ros2_mock_telemetry_topic"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Subscribe"
+      ],
+      "Resource": [
+        "arn:aws:iot:us-west-2:ACCOUNT_ID:topicfilter/ros2_mock_telemetry_topic"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Connect"
+      ],
+      "Resource": [
+        "arn:aws:iot:us-west-2:ACCOUNT_ID:client/CLIENT"
+      ]
+    }
+  ]
+}
+
+```
+
+Create policy from template and apply for your Thing:
+
+```yaml
+export IOT_POLICY_FILE=~/aws-iot-robot-connectivity-samples-ros2/iot_certs_and_config/iot_policy.json
+
+cat $IOT_POLICY_TEMPLATE >> $IOT_POLICY_FILE
+
+sed -i -e "s/ACCOUNT_ID/$ACCOUNT_ID/g" $IOT_POLICY_FILE
+
+sed -i -e "s/CLIENT/$THING_NAME/g" $IOT_POLICY_FILE
+
+cat $IOT_POLICY_FILE
+
+aws iot create-policy --policy-name $IOT_POLICY_NAME --policy-document file://$IOT_POLICY_FILE
+
+aws iot attach-policy --policy-name $IOT_POLICY_NAME --target $CERT_ARN
+
+```
+You will see a response like this:  
+![Wow, a matrix lines of code](/images/MatrixOfCode.png)
+
+Once completed, you are ready to send data to AWS IoT Core.  
+You can now remove the AWS CLI credentials from the robot, as it is already authenticated through the IoT Certificates.
+
+---
+
+## Running the ROS2 Node and Verifying the Connection
+
+Start the ROS2 node to send sample (mock) telemetry data:
+
+```yaml
+source ~/aws-iot-robot-connectivity-samples-ros2/workspace/install/setup.bash
+ros2 run telemetry_mqtt mock_telemetry_pub
+```
+This node will publish mock data to the ```mock_telemetry``` topic.  
+You can view this data using the command:
+```yaml
+ros2 topic echo mock_telemetry
+```
+Then, run the subscriber node to publish this data to AWS IoT Core through the MQTT topic:
+```yaml
+export IOT_CONFIG_FILE=~/aws-iot-robot-connectivity-samples-ros2/iot_certs_and_config/iot_config.json
+
+source ~/aws-iot-robot-connectivity-samples-ros2/workspace/install/setup.bash
+
+ros2 run telemetry_mqtt mqtt_telemetry_pub --ros-args --param path_for_config:=$IOT_CONFIG_FILE
+
+```
+
+To view the published data, go to **AWS Console → IoT Core → MQTT test client**,  
+then subscribe to the ```ros2_mock_telemetry_topic``` topic.  
+You will see the telemetry packets appear directly in the interface.
+
+![First, find for it](/images/SearchIoTCore.png)
+
+![Then, click on MQTT](/images/MQTT.png)
+
+![You will see the MPTT UI here](/images/MQTT.png)
+
+With this, your ROS2 robot is now successfully sending data to AWS IoT Core.  
+From here, you can extend the system to convert any ROS2 topic data into JSON-formatted messages and publish them over MQTT.
+
+---
+
+## Benefits of Internet of Robotics Things (IoRT) Connectivity
+
+As more robotic devices are connected within **autonomous fleets**,  
+the connectivity architecture and data analytics platform become increasingly important.  
+These robots generate massive amounts of data, enabling you to:
+
+- Monitor robot fleets at scale.  
+- Manage and update robot software remotely.  
+- Improve performance using real-world operational data.  
+- Drive **continuous improvement**.
+
+Once your data is in AWS IoT Core, you can leverage IoRT connectivity to build advanced use cases that enhance your robotics systems.
+
+#### 1. Device Management
+
+**AWS IoT Device Management** tools allow you to easily register, organize, monitor, and manage connected devices at scale.  
+You can also remotely access the robot to debug on-site issues through secure **browser-based SSH tunneling** using the **AWS Device Client**.
+
+#### 2. Operational Excellence and Continuous Improvement
+
+You can extract operational insights by streaming data into AWS Analytics tools.  
+For example, you can **pipe data** from **IoT Core** to **Amazon OpenSearch Service** using an **IoT Rule**,  
+and visualize it on an **Amazon Managed Grafana dashboard** to track metrics and performance.
+
+#### 3. Fleet Monitoring and Teleoperation
+
+By combining **AWS IoT** services like **MQTT**, **Device Shadow**, and **Amazon Kinesis Video Streams**,  
+you can build scalable and secure **command-and-control** and **teleoperation** solutions for your entire robot fleet.
+
+#### 4. Build Smarter Robots Faster
+
+**AWS IoT Greengrass** is an **open-source IoT edge runtime** and **cloud service** that enables deploying and managing robotics solutions at scale.  
+It offers ready-to-use components such as:
+
+- Device security and credentials management  
+- Remote SSH access  
+- ML model deployment and execution  
+- Logging and buffered data streaming  
+- Fleet-wide software deployment  
+
+You can use Greengrass to **provision, deploy, and manage the full software lifecycle for your robot fleet**, including ROS-based robots.
+
+---
+
+## Next Steps
+
+With AWS, you gain access to a global suite of tools and resources that simplify developing and operating your robotics systems.
+
+Get started today by connecting your robot to the **AWS Cloud** using the **sample application**,  
+and begin collecting real telemetry data.
+
+While you're on **GitHub**, don’t forget to **“favorite” the repository** to receive updates whenever new improvements are released!

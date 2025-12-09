@@ -6,14 +6,35 @@ chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-#### Giới thiệu về VPC Endpoint
+#### Mục tiêu Workshop
 
-+ Điểm cuối VPC (endpoint) là thiết bị ảo. Chúng là các thành phần VPC có thể mở rộng theo chiều ngang, dự phòng và có tính sẵn sàng cao. Chúng cho phép giao tiếp giữa tài nguyên điện toán của bạn và dịch vụ AWS mà không gây ra rủi ro về tính sẵn sàng.
-+ Tài nguyên điện toán đang chạy trong VPC có thể truy cập Amazon S3 bằng cách sử dụng điểm cuối Gateway. Interface Endpoint  PrivateLink có thể được sử dụng bởi tài nguyên chạy trong VPC hoặc tại TTDL.
+Trong workshop này, bạn sẽ học cách triển khai một hệ thống backend cho game bao gồm các thành phần:
 
-#### Tổng quan về workshop
-Trong workshop này, bạn sẽ sử dụng hai VPC.
-+ **"VPC Cloud"** dành cho các tài nguyên cloud như Gateway endpoint và EC2 instance để kiểm tra.
-+ **"VPC On-Prem"** mô phỏng môi trường truyền thống như nhà máy hoặc trung tâm dữ liệu của công ty. Một EC2 Instance chạy phần mềm StrongSwan VPN đã được triển khai trong "VPC On-prem" và được cấu hình tự động để thiết lập đường hầm VPN Site-to-Site với AWS Transit Gateway. VPN này mô phỏng kết nối từ một vị trí tại TTDL (on-prem) với AWS cloud. Để giảm thiểu chi phí, chỉ một phiên bản VPN được cung cấp để hỗ trợ workshop này. Khi lập kế hoạch kết nối VPN cho production workloads của bạn, AWS khuyên bạn nên sử dụng nhiều thiết bị VPN để có tính sẵn sàng cao.
+- **Cognito**: hệ thống đăng nhập với Username/Password và OAuth (Google).
+- **DynamoDB**: lưu thông tin người chơi, tiến trình, và điểm số.
+- **S3**: lưu trữ avatar người chơi, chỉ cho phép upload qua pre-signed URL.
+- **Lambda**: triển khai các API backend, bao gồm Lambda ZIP thông thường và Lambda Container (OpenCV).
+- **API Gateway REST & WebSocket**: phục vụ các route REST và realtime leaderboard.
+- **CI/CD (CodePipeline + CodeBuild)**: tự động build container và deploy Lambda.
+- **IAM Roles**: phân quyền cho Lambda và CodeBuild.
+- **CloudWatch**: logging, billing alarm, và error alarm cơ bản.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+Bạn sẽ triển khai từng bước các dịch vụ trên AWS, kiểm tra bằng CLI hoặc console, và cuối cùng thu thập các thông số cần thiết để bàn giao cho FE và BE.
+
+#### Phần Lab
+
+1. **Cognito – Hệ thống login**
+2. **DynamoDB – Database chính**
+3. **S3 – Lưu avatar người chơi**
+4. **ECR – Container cho Avatar Processing**
+5. **Lambda – API backend**
+6. **API Gateway REST**
+7. **API Gateway WebSocket**
+8. **CI/CD – Backend**
+9. **IAM Roles**
+10. **Logging & Monitoring**
+
+#### Yêu cầu
+
+- Tài khoản AWS có quyền IAM đủ để tạo và cấu hình các dịch vụ trên.
+- Sử dụng khu vực **ap-southeast-2** cho workshop.
