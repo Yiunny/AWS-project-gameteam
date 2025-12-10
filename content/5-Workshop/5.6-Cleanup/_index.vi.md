@@ -6,32 +6,95 @@ chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-#### Dọn dẹp tài nguyên
+# 5.6 Dọn dẹp môi trường Workshop
 
-Xin chúc mừng bạn đã hoàn thành xong lab này!
-Trong lab này, bạn đã học về các mô hình kiến trúc để truy cập Amazon S3 mà không sử dụng Public Internet.
+Sau khi hoàn thành workshop, hãy dọn dẹp môi trường để tránh phát sinh chi phí không cần thiết trên AWS.
 
-+ Bằng cách tạo Gateway endpoint, bạn đã cho phép giao tiếp trực tiếp giữa các tài nguyên EC2 và Amazon S3, mà không đi qua Internet Gateway.
-Bằng cách tạo Interface endpoint, bạn đã mở rộng kết nối S3 đến các tài nguyên chạy trên trung tâm dữ liệu trên chỗ của bạn thông qua AWS Site-to-Site VPN hoặc Direct Connect.
+---
 
-#### Dọn dẹp
-1. Điều hướng đến Hosted Zones trên phía trái của bảng điều khiển Route 53. Nhấp vào tên của  s3.us-east-1.amazonaws.com zone. Nhấp vào Delete và xác nhận việc xóa bằng cách nhập từ khóa "delete".
+## Xóa các Lambda Functions
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+1. Vào **AWS Lambda Console**.
+2. Chọn tất cả các Lambda Functions bạn đã tạo:
+   - AvatarProcessingLambda
+   - BroadcastHandler
+   - ConnectHandler
+   - DisconnectHandler
+   - LeaderboardFunction
+   - MoneyFunction
+   - ProgressFunction
+   - ScoreFunction
+   - TaskFunction
+   - UnlockFunction
+3. Chọn **Actions → Delete** và xác nhận.
 
-2. Disassociate Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it. 
+---
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
+## Xóa API Gateway
 
-4.Mở console của CloudFormation và xóa hai stack CloudFormation mà bạn đã tạo cho bài thực hành này:
-+ PLOnpremSetup
-+ PLCloudSetup
+1. Vào **API Gateway Console**.
+2. Chọn REST API và WebSocket API của workshop.
+3. Chọn **Actions → Delete API** và xác nhận.
 
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
+---
 
-5. Xóa các S3 bucket
+## Xóa S3 Buckets
 
-+ Mở bảng điều khiển S3
-+ Chọn bucket chúng ta đã tạo cho lab, nhấp chuột và xác nhận là empty. Nhấp Delete và xác nhận delete.
-+ 
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+1. Vào **S3 Console**.
+2. Xóa tất cả các bucket đã tạo:
+   - game-avatars
+   - Các bucket phục vụ workshop (bucket-1, bucket-2,…)
+3. Lưu ý xóa toàn bộ nội dung bên trong trước khi xóa bucket.
+
+---
+
+## Xóa DynamoDB Tables
+
+1. Vào **DynamoDB Console**.
+2. Xóa các bảng:
+   - UserProfiles
+   - UserProgress
+   - Scores
+3. Xác nhận xóa từng bảng.
+
+---
+
+## Xóa IAM Roles
+
+1. Vào **IAM Console → Roles**.
+2. Xóa các Role đã tạo cho workshop:
+   - Lambda Execution Role
+   - CodeBuild Role
+3. Đảm bảo không còn Policy nào gắn với Role trước khi xóa.
+
+---
+
+## Xóa ECR Repositories
+
+1. Vào **ECR Console**.
+2. Xóa repository `avatar-processing`.
+3. Xác nhận xóa toàn bộ images trong repository.
+
+---
+
+## Xóa CodePipeline / CodeBuild
+
+1. Vào **CodePipeline Console**.
+2. Xóa pipeline workshop.
+3. Xóa project CodeBuild tương ứng.
+
+---
+
+## Kiểm tra chi phí
+
+1. Truy cập **AWS Billing Console → Cost Explorer**.
+2. Đảm bảo không còn dịch vụ nào phát sinh chi phí từ workshop.
+3. Nếu còn dịch vụ nào tồn tại, xóa theo hướng dẫn tương ứng.
+
+---
+
+## Tóm tắt
+
+- Môi trường workshop đã được dọn dẹp hoàn toàn.
+- Không còn Lambda, API, S3, DynamoDB, IAM Role, ECR, hay pipeline nào tồn tại.
+- Chi phí phát sinh từ workshop đã được giảm về 0.

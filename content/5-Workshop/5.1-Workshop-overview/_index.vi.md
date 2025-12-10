@@ -1,5 +1,5 @@
 ---
-title : "Giới thiệu"
+title : "Tổng quan Workshop"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false

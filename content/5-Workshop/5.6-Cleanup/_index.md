@@ -5,28 +5,95 @@ weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
-Congratulations on completing this workshop! 
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet. 
-+ By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway. 
-+ By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect. 
+# 5.6 Cleaning up the Workshop Environment
 
-#### clean up
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of *s3.us-east-1.amazonaws.com* zone. Click Delete and confirm deletion by typing delete. 
+After completing the workshop, clean up the AWS environment to avoid unnecessary charges.
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+---
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it. 
+## Delete Lambda Functions
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
+1. Go to **AWS Lambda Console**.
+2. Select all Lambda Functions created for the workshop:
+   - AvatarProcessingLambda
+   - BroadcastHandler
+   - ConnectHandler
+   - DisconnectHandler
+   - LeaderboardFunction
+   - MoneyFunction
+   - ProgressFunction
+   - ScoreFunction
+   - TaskFunction
+   - UnlockFunction
+3. Click **Actions → Delete** and confirm.
 
-4. Open the CloudFormation console  and delete the two CloudFormation Stacks that you created for this lab:
-+ PLOnpremSetup
-+ PLCloudSetup
+---
 
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
+## Delete API Gateway
 
-5. Delete S3 buckets
-+ Open S3 console
-+ Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
+1. Go to **API Gateway Console**.
+2. Select REST API and WebSocket API created for the workshop.
+3. Click **Actions → Delete API** and confirm.
 
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+---
+
+## Delete S3 Buckets
+
+1. Go to **S3 Console**.
+2. Delete all buckets created:
+   - game-avatars
+   - Workshop-specific buckets (bucket-1, bucket-2, …)
+3. Make sure to delete all objects inside each bucket before deleting the bucket.
+
+---
+
+## Delete DynamoDB Tables
+
+1. Go to **DynamoDB Console**.
+2. Delete the following tables:
+   - UserProfiles
+   - UserProgress
+   - Scores
+3. Confirm deletion of each table.
+
+---
+
+## Delete IAM Roles
+
+1. Go to **IAM Console → Roles**.
+2. Delete the roles created for the workshop:
+   - Lambda Execution Role
+   - CodeBuild Role
+3. Ensure no policies are attached before deleting roles.
+
+---
+
+## Delete ECR Repositories
+
+1. Go to **ECR Console**.
+2. Delete the `avatar-processing` repository.
+3. Confirm deletion of all images in the repository.
+
+---
+
+## Delete CodePipeline / CodeBuild
+
+1. Go to **CodePipeline Console**.
+2. Delete the workshop pipeline.
+3. Delete the corresponding CodeBuild project.
+
+---
+
+## Check Costs
+
+1. Go to **AWS Billing Console → Cost Explorer**.
+2. Make sure there are no running resources incurring costs.
+3. Delete any remaining resources if necessary.
+
+---
+
+## Summary
+
+- The workshop environment has been fully cleaned.
+- No Lambda, API Gateway, S3, DynamoDB, IAM Roles, ECR, or pipelines remain.
+- Costs from the workshop should now be zero.
