@@ -89,7 +89,7 @@ This workshop walks you step-by-step through deploying a complete backend for a 
 
 1. [Workshop overview](5.1-Workshop-overview)
 2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-DynamoDB-S3/)
-4. [Access S3 from On-premises](5.4-API-GateWay-Lambda//)
-5. [VPC Endpoint Policies (Bonus)](5.5-CI-CD//)
+3. [Creating DynamoDB and S3 Bucket](5.3-DynamoDB-S3/)
+4. [Creating API Gateway & Lambda](5.4-API-GateWay-Lambda//)
+5. [More about CI/CD](5.5-CI-CD//)
 6. [Clean up](5.6-Cleanup/)

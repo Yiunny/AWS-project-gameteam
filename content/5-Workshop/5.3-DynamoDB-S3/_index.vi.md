@@ -12,7 +12,7 @@ Trong dự án game, chúng ta sử dụng **AWS DynamoDB** và **AWS S3** để
 
 ---
 
-## **DynamoDB – Main Database**
+## DynamoDB – Main Database
 
 DynamoDB được dùng để lưu:
 
@@ -20,35 +20,35 @@ DynamoDB được dùng để lưu:
 - Tiến trình chơi  
 - Điểm số theo từng khu vực game  
 
-### **Các bảng được tạo**
+### Các bảng được tạo
 
-1. **UserProfiles**
+1. UserProfiles
    - Partition Key (PK): `userId`
 
-2. **UserProgress**
+2. UserProgress
    - Partition Key (PK): `userId`
 
-3. **Scores**
+3. Scores
    - Partition Key (PK): `gameArea`
    - Sort Key (SK): `score`
 
-### **DynamoDB Streams**
+### DynamoDB Streams
 
 - Bật **Stream type: NEW IMAGE**
 - DevOps cung cấp **Stream ARN** cho backend để Lambda có thể xử lý sự kiện.
 
 ---
 
-## **S3 – Store Player Avatars**
+## S3 – Store Player Avatars
 
-### **Tạo S3 Bucket**
+### Tạo S3 Bucket
 
 - Bucket name: `game-avatars`
 - Bật **CORS**:
   - Cho phép `PUT`, `POST`, `GET`
   - Origin: `*`
 
-### **Lưu ý**
+### Lưu ý
 
 - Chỉ cho phép upload thông qua **presigned URL** do backend sinh ra.
 

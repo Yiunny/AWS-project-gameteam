@@ -20,11 +20,11 @@ Dưới đây là phần mô tả tổng hợp của ba thành phần này.
 
 ---
 
-## ** REST API Gateway – Lớp API chính của backend**
+## REST API Gateway – Lớp API chính của backend
 
 REST API kết nối frontend (Unity/Web) với các Lambda function phía backend.
 
-### **Các endpoint chính**
+### Các endpoint chính
 
 - `POST /score`
 - `GET /leaderboard`
@@ -38,7 +38,7 @@ REST API kết nối frontend (Unity/Web) với các Lambda function phía backe
 - `POST /avatar/update`
 - `POST /avatar/process` (gọi Lambda dạng container để xử lý avatar)
 
-### **Cấu hình**
+### Cấu hình
 
 - Bật **CORS** cho tất cả route  
 - Tạo **JWT Authorizer** kết nối với Amazon Cognito  
@@ -48,17 +48,17 @@ REST API đảm bảo giao tiếp bảo mật và rõ ràng giữa game và back
 
 ---
 
-## ** WebSocket API – Bảng xếp hạng thời gian thực**
+## WebSocket API – Bảng xếp hạng thời gian thực
 
 WebSocket API dùng để cập nhật leaderboard theo thời gian thực mà không cần polling.
 
-### **Các route**
+### Các route
 
 - `$connect` → lưu `connectionId`
 - `$disconnect` → xóa `connectionId`
 - `broadcast` → gửi dữ liệu bảng xếp hạng cho tất cả client
 
-### **Cấu hình**
+### Cấu hình
 
 - Lambda đọc danh sách `connectionId` từ DynamoDB  
 - Phù hợp cho game cần cập nhật điểm liên tục  
@@ -67,11 +67,11 @@ Dịch vụ này giúp game hiển thị **bảng xếp hạng realtime**.
 
 ---
 
-## ** Lambda Functions – Xử lý logic game**
+## Lambda Functions – Xử lý logic game
 
 Hệ thống sử dụng hai loại Lambda:
 
-### **1. Lambda dạng ZIP**
+### 1. Lambda dạng ZIP
 
 Dùng cho các chức năng logic game tiêu chuẩn:
 
@@ -84,7 +84,7 @@ Dùng cho các chức năng logic game tiêu chuẩn:
 
 Mỗi API route có **một Lambda riêng** để tách biệt logic rõ ràng.
 
-### **2. Lambda dạng Container**
+### 2. Lambda dạng Container
 
 Dùng cho xử lý nặng, đặc biệt AI Avatar:
 

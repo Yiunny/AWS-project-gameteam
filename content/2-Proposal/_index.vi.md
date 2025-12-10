@@ -1,195 +1,150 @@
 ---
-title: "Đề Xuất Dự Án"
+title: "Đề xuất dự án"
 date: "`r Sys.Date()`"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Alien Spy: Hạ Tầng Game Dựa Trên AWS
-## Game Unity Serverless cho Phát Triển Kỹ Năng Cloud
-
-
-### 1. Tóm tắt điều hành
-**Alien Spy** là một trò chơi endless runner serverless phát triển bằng Unity và AWS, nhằm làm nền tảng học tập thực hành tích hợp cloud. Nền tảng này giải quyết khoảng trống kỹ năng cloud ở các trường đại học Việt Nam: sinh viên học các dịch vụ AWS như Lambda, DynamoDB, API Gateway nhưng hiếm khi trải nghiệm tích hợp nhiều dịch vụ thực tế.  
-
-
-**Các tính năng chính**:  
-- **Chế độ đua 1v1 thời gian thực**  
-- **Cá nhân hóa Avatar bằng AI**  
-- **Hệ thống vật phẩm & boss**  
-- **Backend serverless**  
-- **Bảng xếp hạng & sự kiện thời gian thực**  
-
-
-**Lợi ích & ROI**  
-- Sinh viên có dự án portfolio AWS thực hành.  
-- Giảng viên có mô-đun lab sẵn sàng triển khai.  
-- Trường đại học nâng cao khả năng tuyển dụng & cơ hội hợp tác AWS.  
-- Đầu tư: $0–100 cho hạ tầng, tổng 600 giờ làm việc (12 tuần × 5 thành viên × 10 giờ/tuần).  
-
+# Backend Game Multiplayer Serverless  
+Một Giải Pháp AWS Mở Rộng Cho Game Thời Gian Thực & Xử Lý Avatar AI
 
 ---
 
+## 1. Tóm tắt dự án
+Dự án này nhằm xây dựng một hạ tầng backend serverless mạnh mẽ cho game Unity dạng multiplayer. Hệ thống phân chia rõ ràng trách nhiệm giữa DevOps, Frontend (Unity) và Backend.
 
-### 2. Vấn đề
-#### Vấn đề là gì?
-- Hầu hết trò chơi endless runner chỉ tối ưu cho mobile.  
-- Sinh viên hiếm khi có dự án cloud tích hợp thực tế.  
-- Thiếu cá nhân hóa avatar và tính năng cạnh tranh → giảm tương tác.  
+Các dịch vụ AWS được sử dụng để xử lý:
 
+- **Xác thực người dùng** → Amazon Cognito  
+- **Logic Gameplay** → AWS Lambda  
+- **Bảng xếp hạng thời gian thực** → API Gateway WebSocket + DynamoDB Streams  
+- **Xử lý Avatar bằng AI** → Lambda dạng container (OpenCV/MediaPipe)  
 
-#### Giải pháp
-- **Kiến trúc serverless trên AWS** tích hợp với Unity WebGL.  
-- Multiplayer thời gian thực (WebSocket), avatar AI, cơ chế vật phẩm & boss.  
-- Backend DynamoDB có khả năng mở rộng, lưu trữ tài nguyên S3, CDN CloudFront, xác thực Cognito.  
-
-
-#### Các bên liên quan
-| Bên liên quan | Mối quan tâm |
-|------------|---------|
-| Người chơi | Trải nghiệm game desktop cạnh tranh, cá nhân hóa |
-| Nhà phát triển | Dự án học thuật tích hợp Unity & AWS |
-| Giảng viên | Dự án kỹ thuật tốt, có thể tái sử dụng |
-
+Kiến trúc mang lại khả năng mở rộng cao, tự động triển khai (CI/CD) và tích hợp WebGL mượt mà (triển khai trên itch.io hoặc CloudFront).
 
 ---
 
+## 2. Vấn đề đặt ra
 
-### 3. Kiến trúc giải pháp
-**Kiến trúc tổng thể**  
+### Vấn đề là gì?
+Game multiplayer yêu cầu backend phức tạp: xác thực, giao tiếp thời gian thực, lưu trữ dữ liệu… Các mô hình server truyền thống tốn kém, khó bảo trì và khó mở rộng khi lượng người chơi tăng đột biến.  
+Game cũng cần **xử lý avatar bằng AI**, tác vụ này đòi hỏi khả năng tính toán cao.
 
+### Giải pháp
+Một kiến trúc AWS **hoàn toàn serverless**:
 
-![Alien Spy Architecture Placeholder](/images/2-Proposal/aws.png)
+- **Authentication:** Amazon Cognito (User Pools + Hosted UI)  
+- **Logic & Compute:** Lambda (zip + container từ ECR)  
+- **Realtime:** WebSocket API + DynamoDB Streams  
+- **Storage:** S3 để lưu avatar / assets  
 
-
-**Dịch vụ AWS sử dụng**  
-- **Route 53** – DNS & khả năng sẵn sàng cao  
-- **WAF** – Bảo mật  
-- **CloudFront** – CDN cho WebGL  
-- **S3** – Game builds, tài nguyên, avatar  
-- **API Gateway** – REST/WebSocket APIs  
-- **Cognito** – Xác thực người dùng  
-- **Lambda** – Backend serverless  
-- **DynamoDB** – Dữ liệu người chơi, bảng xếp hạng  
-- **SNS / DynamoDB Streams** – Thông báo thời gian thực  
-- **CodePipeline & CodeBuild** – CI/CD tự động  
-- **CloudFormation** – Hạ tầng dưới dạng mã  
-
-
-**Thiết kế thành phần**  
-- **Frontend**: Unity WebGL qua CloudFront + S3  
-- **Backend**: API Gateway → Lambda → DynamoDB → Streams → Lambda → Player  
-- **Pipeline Avatar AI**: Lambda xử lý avatar → lưu S3  
-- **Leaderboard thời gian thực**: DynamoDB Streams + Lambda đẩy cập nhật  
-- **Quản lý người dùng**: Cognito quản lý 5–50 tài khoản sinh viên  
-
-
-**Bảo mật & tuân thủ**  
-- WAF, TLS 1.2+, mã hóa AES-256 S3, IAM role theo nguyên tắc least privilege  
-
+### Lợi ích & Hiệu quả
+- **Tiết kiệm chi phí:** Trả theo mức sử dụng (Lambda, DynamoDB)  
+- **Mở rộng tự động:** Tự scale khi nhiều người chơi  
+- **Tự động hóa:** CI/CD giúp triển khai cực nhanh  
 
 ---
 
+## 3. Kiến trúc giải pháp
+Hệ thống theo mô hình microservices sự kiện. Unity giao tiếp qua REST (score, shop) và WebSocket (leaderboard). Việc xử lý avatar AI dùng Lambda container.
 
-### 4. Triển khai kỹ thuật
-**Các giai đoạn triển khai**  
-1. Thiết kế & thiết lập hạ tầng  
-2. Phát triển API Backend  
-3. Tích hợp Frontend / Game Client  
-4. Kiểm thử & tối ưu  
-5. Triển khai CI/CD  
+### Dịch vụ AWS sử dụng
+- **Amazon Cognito** – User Pools, Hosted UI  
+- **API Gateway (REST + WebSocket)**  
+- **AWS Lambda (Zip + Container Image)**  
+- **DynamoDB + Streams**  
+- **S3**  
+- **ECR**  
+- **CodePipeline & CodeBuild**  
 
+### Thiết kế thành phần
 
-**Yêu cầu kỹ thuật**  
-- Build Unity WebGL  
-- AWS Lambda, API Gateway, DynamoDB, SNS, CloudFront, S3, Cognito  
-- Python cho xử lý avatar AI  
-- CloudFormation/CDK cho hạ tầng as code  
+#### Frontend
+Unity WebGL build chạy trên itch.io hoặc CloudFront.
 
-
-**Chiến lược kiểm thử**  
-- Unit test (xUnit/NUnit)  
-- Integration test (Postman)  
-- Performance test (CloudWatch/K6)  
-- End-to-end system test  
-
-
-**Triển khai & rollback**  
-- CodePipeline tự động deploy  
-- Versioning Lambda & backup DynamoDB để rollback  
-
+#### Luồng dữ liệu
+1. User đăng nhập → Nhận token Cognito  
+2. Unity gọi API REST → Lambda → DynamoDB  
+3. Upload avatar → Presigned URL → S3 → Lambda AI container  
+4. Cập nhật điểm → DynamoDB Stream → WebSocket broadcast  
 
 ---
 
+## 4. Triển khai kỹ thuật
 
-### 5. Timeline & Milestones
-| Giai đoạn | Tuần | Kết quả giao hàng |
-|-------|-------|--------------|
-| Pre-production | 1–3 | GDD, Kiến trúc AWS |
-| Core Gameplay | 4–7 | Bản đồ, chướng ngại, vật phẩm, leaderboard |
-| Boss & Avatar | 8–9 | AI boss, cutscenes, pipeline avatar AI |
-| Testing & Optimization | 10–11 | QA, tuning hiệu năng |
-| Deployment & Demo | 12 | Demo WebGL, tài liệu |
+### Các giai đoạn triển khai
+1. **Thiết lập hạ tầng (DevOps)** – Cognito, DynamoDB, S3, API Gateway  
+2. **Backend Skeleton (BE)** – API spec, Postman, Lambda base code  
+3. **Tích hợp Login (FE)** – Unity AuthManager  
+4. **Kết nối & Streams (DevOps)** – API ↔ Lambda, kích hoạt Streams  
+5. **Gameplay Integration (FE)** – DataManager kết nối REST APIs  
+6. **Kiểm thử end-to-end** – Login, Shop, Leaderboards, Avatar  
+7. **Triển khai** – WebGL + Redirect URL  
 
-
----
-
-
-### 6. Ước tính ngân sách
-**Dự kiến Free Tier AWS**  
-- Lambda: $0  
-- API Gateway: ~$0.01/tháng  
-- S3 + CloudFront: ~$0.15/tháng  
-- DynamoDB: $0  
-- SNS/WebSocket: $0  
-- Tổng: $0–5/tháng (tối đa $50–100 nếu vượt Free Tier)  
-
-
-**Chi phí phát triển & dịch vụ bên thứ 3**  
-- 0 VND, Python AI mã nguồn mở, Unity Personal  
-
+### Yêu cầu kỹ thuật
+- **Frontend:** Unity C# – AwsConfig, AuthManager, DataManager, RealtimeManager  
+- **Backend:** Node.js/Python cho Lambda, Docker cho container AI  
+- **DevOps:** IAM roles, CloudFormation (tùy chọn), WAF (tùy chọn)  
 
 ---
 
+## 5. Timeline & Milestones
 
-### 7. Đánh giá rủi ro
-| Rủi ro | Tác động | Xác suất | Giải pháp |
-|------|--------|------------|------------|
-| Misconfiguration AWS | Cao | Trung bình | CloudFormation templates, kiểm thử |
-| WebSocket không ổn định | Trung bình | Cao | Reconnect & fallback sang REST |
-| Tích hợp Unity-AWS | Cao | Trung bình | Wrapper C# riêng, test độc lập |
-| Vượt Free Tier | Thấp | Trung bình | Cảnh báo ngân sách, tối ưu payload |
-| Trễ tiến độ | Trung bình | Cao | Agile sprint, buffer 1 tuần |
-| Lộ dữ liệu | Cao | Thấp | S3 private, auth Cognito, TLS |
+### Giai đoạn 1: Nền tảng (Ngày 1–3)
+- DevOps thiết lập Cognito, DynamoDB, S3, API Gateway.
 
+### Giai đoạn 2: Phát triển logic (Ngày 3–8)
+- Backend xây Lambda + Container AI Avatar  
+- Frontend làm Login  
 
----
+### Giai đoạn 3: Tích hợp (Ngày 8–12)
+- DevOps nối Streams  
+- Frontend tích hợp API  
 
-
-### 8. Kết quả kỳ vọng
-- Latency API <100ms; cập nhật real-time <2s  
-- Hỗ trợ 50+ người chơi đồng thời  
-- Xử lý avatar AI <5s  
-- ≥90% test pass  
-- Chi phí < $30/tháng  
-
-
-**Lợi ích dài hạn**  
-- Nền tảng multiplayer có khả năng mở rộng  
-- Học AWS thực hành & dự án portfolio  
-- Hạ tầng tái sử dụng cho game/lab tương lai  
-
+### Giai đoạn 4: Kiểm thử & Ra mắt (Ngày 13–15)
+- Kiểm thử realtime leaderboard + avatar pipeline  
+- Triển khai WebGL  
 
 ---
 
+## 6. Ước tính chi phí
+*(Dựa theo AWS Pricing Calculator)*
 
-### 9. Tổng quan Game Design – Alien Spy
-- **Chủ đề**: Sci-fi Việt Nam  
-- **Nhân vật**: Alien trên UFO, avatar cá nhân hóa AI  
-- **Chướng ngại**: Dashable & non-dashable  
-- **Vật phẩm**: Buffs/Debuffs  
-- **Tiền & Shop**: Thuốc lào   
-- **Bản đồ & Level**: 3 vùng, 5 level mỗi vùng, boss tại các level mốc  
-- **Leaderboard**: Real-time, local & global  
-- **Sự kiện thời gian thực**: Thử thách trực tiếp qua SNS/DynamoDB Streams
+### Chi phí hạ tầng
+- **Lambda:** Hầu hết nằm trong Free Tier  
+- **DynamoDB:** Free Tier (25GB)  
+- **S3:** ~0.023 USD/GB  
+- **CloudWatch:** ~0.5–1 USD/tháng  
+- **ECR:** ~0.10 USD/GB  
+
+**Tổng chi phí ước tính:** **< 5 USD/tháng** trong giai đoạn phát triển.
+
+---
+
+## 7. Đánh giá rủi ro
+
+### Ma trận rủi ro
+- **Độ phức tạp tích hợp:** Ảnh hưởng cao / Xác suất trung bình  
+- **Độ trễ:** Ảnh hưởng trung bình / Xác suất thấp  
+- **Chi phí vượt dự kiến:** Ảnh hưởng thấp / Xác suất thấp  
+
+### Giảm thiểu rủi ro
+- Dùng Postman Mock Server cho FE phát triển trước  
+- Dùng placeholder cho leaderboard / task  
+- CloudWatch Logs + alarm (error > 10/min)  
+
+---
+
+## 8. Kết quả kỳ vọng
+
+### Cải thiện kỹ thuật
+- Backend game serverless hoàn chỉnh  
+- Bảo mật danh tính và dữ liệu người chơi  
+- Bảng xếp hạng realtime  
+- Xử lý avatar AI tự động  
+
+### Giá trị lâu dài
+- Kiến trúc có thể tái sử dụng cho các game tiếp theo  
+- Tự động mở rộng mà không cần server  
+- Chi phí vận hành thấp  

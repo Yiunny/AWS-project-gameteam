@@ -19,11 +19,11 @@ Below is a combined overview of how these services operate together.
 
 ---
 
-## ** REST API Gateway – Backend API Layer**
+## REST API Gateway – Backend API Layer
 
 The REST API connects the frontend (Unity/Web) to the backend Lambda functions.
 
-### **Main Endpoints**
+### Main Endpoints
 
 - `POST /score`
 - `GET /leaderboard`
@@ -37,7 +37,7 @@ The REST API connects the frontend (Unity/Web) to the backend Lambda functions.
 - `POST /avatar/update`
 - `POST /avatar/process` (proxy to the avatar container Lambda)
 
-### **Configuration**
+### Configuration
 
 - Enable **CORS** for all routes  
 - Use **JWT Authorizer** connected to Amazon Cognito  
@@ -47,17 +47,17 @@ REST API ensures secure and structured communication for all core game features.
 
 ---
 
-## ** WebSocket API – Real-Time Leaderboard**
+## WebSocket API – Real-Time Leaderboard
 
 The WebSocket API handles live leaderboard updates.
 
-### **Routes**
+### Routes
 
 - `$connect` → store `connectionId`
 - `$disconnect` → remove `connectionId`
 - `broadcast` → push updated leaderboard to all players
 
-### **Configuration**
+### Configuration
 
 - Lambda functions read active connectionIds from DynamoDB  
 - Ideal for timely score updates without polling  
@@ -66,11 +66,11 @@ This service allows the game to display **real-time ranking updates**.
 
 ---
 
-## ** Lambda Functions – Game Logic Execution**
+## Lambda Functions – Game Logic Execution
 
 Two Lambda types are used:
 
-### **1. Standard Lambda (ZIP)**
+### 1. Standard Lambda (ZIP)
 
 Used for standard game logic:
 
@@ -83,7 +83,7 @@ Used for standard game logic:
 
 Each API route has a **dedicated Lambda function** to keep logic clean and modular.
 
-### **2. Container Lambda**
+### 2. Container Lambda
 
 Used for heavy AI processing:
 
