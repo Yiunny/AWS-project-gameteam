@@ -36,6 +36,8 @@ This workshop walks you step-by-step through deploying a complete backend for a 
 10. Logging & Monitoring — Configure CloudWatch logs and alerts.
 11. WAF — (Optional) Protect API from malicious requests.
 
+![Our game struture](/images/2-Proposal/AWSfinal.png)
+> *Our game struture importing with AWS*
 
 ## Technical Details
 ### DynamoDB

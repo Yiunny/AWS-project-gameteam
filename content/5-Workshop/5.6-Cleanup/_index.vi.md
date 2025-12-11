@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-# 5.6 Dọn dẹp môi trường Workshop
+# Dọn dẹp môi trường Workshop
 
 Sau khi hoàn thành workshop, hãy dọn dẹp môi trường để tránh phát sinh chi phí không cần thiết trên AWS.
 

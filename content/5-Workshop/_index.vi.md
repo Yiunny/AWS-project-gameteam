@@ -37,7 +37,8 @@ Workshop này hướng dẫn từng bước cách triển khai backend cho một
 9. IAM Roles — tạo role phù hợp cho các service (Lambda, CodeBuild, CodePipeline).
 10. Logging & Monitoring — CloudWatch log group, alarm billing & error.
 11. WAF — (tùy chọn) bảo vệ API.
-
+![Our game struture](/images/2-Proposal/AWSfinal.png)
+>*Hình ảnh chi tiết cấu trúc về game tích hợp với AWS*
 
 ## Chi tiết kỹ thuật quan trọng
 ### DynamoDB

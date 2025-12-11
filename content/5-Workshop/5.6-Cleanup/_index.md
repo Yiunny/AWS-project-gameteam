@@ -5,7 +5,7 @@ weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
-# 5.6 Cleaning up the Workshop Environment
+# Cleaning up the Workshop Environment
 
 After completing the workshop, clean up the AWS environment to avoid unnecessary charges.
 
