@@ -1,126 +1,65 @@
 ---
-title: "Event 2"
+title: "AI-Driven Development Life Cycle"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
+# Summary Report: ““AI-Driven Development Life Cycle: Reimagining Software Engineering (AWS Cloud Mastery Series #1)
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
-
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
 
 ### Event Objectives
-
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+-   Present a market update on the AI/ML adoption and current trends within the local region.
+-   Provide hands-on training for developing end-to-end ML models using **Amazon SageMaker**.
+-   Conduct a technical deep dive into **Generative AI** capabilities on **Amazon Bedrock**, including its Foundation Models, Agents, and Guardrails.
+-   Provide essential skills training in **Prompt Engineering** and the deployment of **Retrieval-Augmented Generation (RAG)** systems.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+-   **AWS Experts Team**
 
 ### Key Highlights
 
-#### Identifying the drawbacks of legacy application architecture
+#### Program Introduction & Networking
+-   **Market Insight**: Shared an update on the current state of Artificial Intelligence and Machine Learning adoption across the Vietnam market.
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+#### AWS AI/ML Services: The SageMaker Platform
+-   **Unified ML Workflow**: Detailed the complete machine learning lifecycle managed on **Amazon SageMaker**, covering data preparation, labeling, model training, tuning, and integration with **MLOps** for automated deployment.
+-   **Studio Walkthrough**: A live demonstration provided a clear view of the **SageMaker Studio** interface and its professional data science features.
 
-#### Transitioning to modern application architecture – Microservices
-
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
-
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
-
-#### Domain-Driven Design (DDD)
-
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
-
-#### Event-Driven Architecture
-
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+#### Generative AI Deep Dive with Amazon Bedrock
+-   **Model Selection**: Offered criteria and comparisons for selecting the optimal Foundation Models, such as Claude, Llama, and Titan, based on specific use case requirements.
+-   **Prompt Optimization**: Covered advanced **Prompt Engineering** techniques, including **Chain-of-Thought** reasoning and **Few-shot learning**.
+-   **RAG Implementation**: Demonstrated the "Retrieval -> Augmentation -> Generation" architecture, focusing on how to integrate internal **Knowledge Bases** to significantly improve AI response accuracy.
+-   **Advanced Controls**: Introduced **Bedrock Agents** for managing complex, multi-step tasks and **Guardrails** for ensuring content safety and regulatory compliance.
+-   **Live Build**: Successfully built a functional GenAI Chatbot prototype using Amazon Bedrock during the session.
 
 ### Key Takeaways
 
-#### Design Mindset
+#### Platform Strategy
+-   **SageMaker's Role**: The ideal, robust platform for managing traditional, iterative **Machine Learning** development cycles with governance.
+-   **Bedrock's Advantage**: Provides a fast, simplified API-based route to deploying **Generative AI** applications without the overhead of managing complex underlying infrastructure.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+#### Advanced Implementation
+-   **Beyond Simple Chat**: **RAG and Agents** are critical technologies that enable GenAI to move past basic interactions and solve complex, real-world business challenges and workflows.
+-   **Compliance and Safety**: **Guardrails** are an obligatory component for any enterprise deployment, ensuring the AI operates within defined ethical, safety, and regulatory boundaries.
 
 ### Applying to Work
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+-   **Standardize MLOps**: Apply the learned SageMaker standards to automate the model lifecycle, tracking, and governance in ongoing projects.
+-   **Develop RAG PoC**: Conduct experiments to integrate proprietary company documents into a Bedrock **Knowledge Base** to build a context-aware information retrieval assistant.
+-   **Improve AI Quality**: Implement **Chain-of-Thought** prompting techniques to enhance the logical consistency and output quality of existing AI applications.
+-   **Strategic Selection**: Utilize the learned criteria to make informed decisions when selecting Foundation Models, balancing performance requirements against cost considerations.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+This workshop provided a highly valuable balance between fundamental **Machine Learning** principles and contemporary **Generative AI** practices.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+#### Practical Application
+-   The **SageMaker Studio walkthrough** offered a clear visualization of a professional ML workflow.
+-   The **Bedrock Chatbot demonstration** was a highlight, showcasing the rapid development possible for powerful GenAI applications.
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
+#### Market Relevance
+-   The analysis of the local AI market helped frame my technical work within the broader industry trends and identified future opportunities.
 
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+> The event help me understand more about AI-Driven Development Life Cycle.

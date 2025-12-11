@@ -1,5 +1,5 @@
 ---
-title: "Event 1"
+title: "Kick-off AWS FCJ Workforce"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
@@ -7,117 +7,78 @@ pre: " <b> 4.1. </b> "
 ---
 
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Summary Report: “Kick-off AWS FCJ Workforce -FPTU OJT FALL 2025”
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Build a new generation of high-quality AWS Builders for Vietnam.
+- Equip students with hands-on skills in Cloud, DevOps, AI/ML, Security, and Data & Analytics.
+- Connect students with the AWS Study Group community of 47,000+ members and AWS partner companies.
+-   Deliver strategic **career orientation** covering specialized fields like Cloud Computing, DevOps, and GenAI.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **Nguyễn Gia Hưng** – Head of Solutions Architect, AWS Vietnam
+- **Đỗ Huy Thắng** – DevOps Lead, VNG
+- **Danh Hoàng Hiếu Nghị** –  GenAI Engineer, Renova
+-  **Bùi Hồ Linh Nhi** – AI Engineer, SoftwareOne
+-  **Phạm Nguyễn Hải Anh** – Cloud Engineer, G-Asia Pacific
+-  **Nguyễn Đồng Thanh Hiệp** – Principal Cloud Engineer, G-Asia Pacific
 
-### Key Highlights
+#### Introduce AWS program
 
-#### Identifying the drawbacks of legacy application architecture
+- Sharing what we have to do when we join AWS program
+- Speak about devOps, advantage and the other services we are about to learn 
+- Introduce exccelent member in the AWS and things they have don 
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+#### AWS First Cloud Journey & Future Direction
 
-#### Transitioning to modern application architecture – Microservices
+- The AWS First Cloud Journey marks the beginning of a transformative path toward building cloud expertise and innovation. It empowers learners and organizations to explore the core foundations of AWS services — from cloud computing, networking, and storage to advanced topics like DevOps, AI/ML, and data analytics. This journey not only provides practical, hands-on experience but also cultivates a mindset of agility, scalability, and continuous improvement. Looking toward the future direction, AWS aims to foster a new generation of cloud professionals who can drive digital transformation, implement sustainable cloud solutions, and harness cutting-edge technologies to shape the future of Vietnam’s digital economy.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### DevOps & Future Career
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+- **Bridge between Development and Operations**: Connects software development and IT operations to enhance collaboration, speed, and reliability.  
+- **Culture of Continuous Improvement**: Focuses on automation, testing, monitoring, and feedback for faster and higher-quality delivery.  
+- **High Demand for DevOps Professionals**: Cloud adoption drives strong demand for DevOps experts across all industries.  
+- **Key Future Skills**: Cloud platforms (AWS, Azure, GCP) → CI/CD pipelines → containerization (Docker, Kubernetes) → infrastructure as code (Terraform, CloudFormation).  
+- **Career Growth Opportunities**: Roles like DevOps Engineer, Cloud Architect, SRE, and Platform Engineer will continue expanding globally.  
+- **Mindset for Success**: Agility, collaboration, problem-solving, and continuous learning are essential for thriving in the DevOps era.  
 
-#### Domain-Driven Design (DDD)
+#### From First Cloud Journey to GenAI Engineer
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+- **First Cloud Journey**: The starting point to explore cloud computing, mastering the fundamentals of AWS services and architecture.  
+- **Building Cloud Foundations**: Learn key domains such as networking, storage, security, and compute to understand how modern cloud systems operate.  
+- **DevOps Integration**: Adopt automation, CI/CD pipelines, and Infrastructure as Code to enable faster and more reliable deployments.  
+- **Data & Analytics Skills**: Gain the ability to collect, process, and visualize data for informed business decisions.  
+- **AI/ML Advancement**: Move from cloud operations to applying machine learning and artificial intelligence using AWS AI services.  
+- **GenAI Engineer Path**: Leverage cloud, DevOps, and AI expertise to design, deploy, and optimize generative AI applications for real-world innovation.  
 
-#### Event-Driven Architecture
+#### She in Tech & The Journey with First Cloud Journey
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+-  **Finding and create a team that follow you entire carrier**: Join in Hackathon and create many projects.
+-  **Memories**: Create many memories with your team and become better
 
-#### Compute Evolution
+#### A Day in the Life of a Cloud Engineer
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+- **Morning Check-ins**: Review system dashboards, monitor cloud resources, and ensure all services are running smoothly.  
+- **Infrastructure Management**: Use Infrastructure as Code (IaC) tools like Terraform or CloudFormation to deploy and manage environments.  
+- **Security & Compliance**: Apply IAM policies, monitor access logs, and ensure systems meet security best practices.  
+- **Automation & DevOps Tasks**: Build CI/CD pipelines, automate deployments, and optimize performance for scalability.  
+- **Collaboration & Problem-Solving**: Work with developers, DevOps, and data teams to troubleshoot and improve cloud solutions.  
+- **Learning & Innovation**: Stay updated with the latest AWS services, explore AI/ML integrations, and continuously improve cloud architecture skills.  
 
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
-
-### Key Takeaways
-
-#### Design Mindset
-
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+Attending the **“Kick-off AWS FCJ Workforce -FPTU OJT FALL 2025”** workshop was extremely valuable, giving me a comprehensive view of people have been studied and exprienced. We also know the others services in AWS and witnessed many project that was created by many exprienced people and could hear a story of the team AWS their journey to become the best developer.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
 
 #### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
+-  Know that we are going to do in AWS company.  
+-  Make Friends and you could learn from your mentor.  
+-  Got motivation to working in AWS.
+  
 
-#### Some event photos
-*Add your event photos here*  
+> Overall, the event just about introduce about the company , people and other services . I also got motivation to move forward and learn as best as i can of AWS services.
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
